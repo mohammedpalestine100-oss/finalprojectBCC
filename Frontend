@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شهادة - منصة توثيق الشهادات</title>
+    <style>
+        /* الأساسيات */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #64748b;
+            --background: #ffffff;
+            --surface: #f8fafc;
+            --text: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --error: #ef4444;
+            --warning: #f59e0b;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
+            background: var(--background);
+            line-height: 1.6;
+            direction: rtl;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* شريط التنقل */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-logo h2 {
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .nav-logo span {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* الأزرار */
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-large {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+        }
+
+        /* قسم البطل */
+        .hero {
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-top: 80px;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            opacity: 0.8;
+        }
+
+        /* بطاقة الشهادة */
+        .certificate-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            color: var(--text);
+            max-width: 400px;
+        }
+
+        .certificate-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .certificate-icon {
+            font-size: 2rem;
+        }
+
+        .certificate-status {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .certificate-status.verified {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .certificate-body h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .certificate-body p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .certificate-meta {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .certificate-meta div {
+            margin-bottom: 0.25rem;
+        }
+
+        .certificate-footer {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .blockchain-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--primary);
+        }
+
+        /* الأقسام العامة */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+        }
+
+        /* قسم المميزات */
+        .features {
+            background: var(--surface);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+        }
+
+        /* قسم كيف تعمل */
+        .how-it-works {
+            background: white;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+        }
+
+        .step-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-description {
+            color: var(--text-secondary);
+        }
+
+        /* قسم التحقق السريع */
+        .quick-verify {
+            background: var(--surface);
+        }
+
+        .verify-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .verify-input-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .verify-input-group input {
+            flex: 1;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .verify-input-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .verify-result {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: right;
+            display: none;
+        }
+
+        .verify-result.show {
+            display: block;
+        }
+
+        /* قسم الدعوة للعمل */
+        .cta {
+            background: var(--primary);
+            color: white;
+        }
+
+        .cta-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-content p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        /* التذييل */
+        .footer {
+            background: var(--text);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo h3 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-description {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-section a {
+            display: block;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+        }
+
+        /* نماذج التسجيل والدخول */
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--surface);
+            padding: 120px 0 40px;
+        }
+
+        .auth-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-header h2 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .form-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+
+        .form-link:hover {
+            text-decoration: underline;
+        }
+
+        .form-divider {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .form-divider::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .form-divider span {
+            background: white;
+            padding: 0 1rem;
+            color: var(--text-secondary);
+            position: relative;
+        }
+
+        .wallet-btn {
+            width: 100%;
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .wallet-btn:hover {
+            background: var(--background);
+            border-color: var(--primary);
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--text-secondary);
+        }
+
+        /* لوحة التحكم */
+        .dashboard {
+            padding: 120px 0 40px;
+            background: var(--surface);
+            min-height: 100vh;
+        }
+
+        .dashboard-header {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .dashboard-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .action-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .action-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .recent-activity {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--surface);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* التجاوب */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .verify-input-group {
+                flex-direction: column;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .auth-card {
+                margin: 1rem;
+                padding: 2rem;
+            }
+            
+            .dashboard-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* أنيميشن الإشعارات */
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-width: 300px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            animation: slideIn 0.3s ease;
+        }
+        
+        .notification.success { background: #10b981; }
+        .notification.error { background: #ef4444; }
+        .notification.warning { background: #f59e0b; }
+        .notification.info { background: #3b82f6; }
+        
+        .notification-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.25rem;
+            cursor: pointer;
+            margin-right: 0.5rem;
+        }
+
+        /* حالة التحميل */
+        .loading-state {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3b82f6;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* نتائج التحقق */
+        .verification-result {
+            text-align: right;
+        }
+        
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .status-badge.active { background: #d1fae5; color: #065f46; }
+        .status-badge.revoked { background: #fee2e2; color: #991b1b; }
+        .status-badge.expired { background: #fef3c7; color: #92400e; }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        
+        .label {
+            font-weight: 600;
+            color: #64748b;
+        }
+        
+        .value.verified { color: #10b981; font-weight: 600; }
+        .value.not-verified { color: #ef4444; font-weight: 600; }
+        
+        .hash {
+            font-family: monospace;
+            font-size: 0.875rem;
+            background: #f8fafc;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>شهادة</h2>
+                <span>منصة توثيق الشهادات</span>
+            </div>
+            <div class="nav-links">
+                <a href="#features">المميزات</a>
+                <a href="#how-it-works">كيف تعمل</a>
+                <a href="#verify">تحقق من شهادة</a>
+                <a href="#login" class="btn-outline">تسجيل الدخول</a>
+                <a href="#register" class="btn-primary">إنشاء حساب</a>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <!-- الصفحة الرئيسية -->
+    <div id="home-page">
+        <!-- قسم البطل -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span>⚡ مدعوم بتقنية البلوكشين</span>
+                    </div>
+                    <h1 class="hero-title">توثيق الشهادات بشكل آمن وغير قابل للتزوير</h1>
+                    <p class="hero-description">
+                        منصة شهادة تمكن المؤسسات من إصدار الشهادات وتخزينها على البلوكشين، 
+                        مما يضمن صحتها وأصالتها للأبد
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#register" class="btn-primary btn-large">ابدأ الآن</a>
+                        <a href="#verify" class="btn-secondary btn-large">تحقق من شهادة</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-number" id="total-certificates">10,000+</div>
+                            <div class="stat-label">شهادة موثقة</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number" id="verified-count">99.9%</div>
+                            <div class="stat-label">معدل التحقق</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number" id="issuer-count">500+</div>
+                            <div class="stat-label">مؤسسة معتمدة</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="certificate-card">
+                        <div class="certificate-header">
+                            <div class="certificate-icon">📜</div>
+                            <div class="certificate-status verified">موثقة</div>
+                        </div>
+                        <div class="certificate-body">
+                            <h3>شهادة إتمام الدورة</h3>
+                            <p>تم منح هذه الشهادة تقديراً للإنجاز المتميز</p>
+                            <div class="certificate-meta">
+                                <div>الرقم: CERT-2024-001</div>
+                                <div>المستلم: أحمد محمد</div>
+                                <div>التاريخ: 2024-03-15</div>
+                            </div>
+                        </div>
+                        <div class="certificate-footer">
+                            <div class="blockchain-badge">
+                                <span>⛓️ مخزنة على البلوكشين</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم المميزات -->
+        <section id="features" class="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">مميزات المنصة</h2>
+                    <p class="section-description">كل ما تحتاجه لإصدار وإدارة الشهادات بشكل آمن</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>أمان البلوكشين</h3>
+                        <p>تخزين غير قابل للتغيير على شبكة البلوكشين يضمن عدم إمكانية تزوير الشهادات</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>تحقق فوري</h3>
+                        <p>التحقق من صحة الشهادات خلال ثوانٍ باستخدام الرقم الفريد أو رمز QR</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🏢</div>
+                        <h3>متعدد المؤسسات</h3>
+                        <p>دعم كامل لأنواع مختلفة من المؤسسات المصدرة للشهادات</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💼</div>
+                        <h3>إدارة متكاملة</h3>
+                        <p>لوحات تحكم مخصصة للمصدرين والمدققين والمدراء</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>تقارير وتحليلات</h3>
+                        <p>إحصائيات مفصلة عن الشهادات وعمليات التحقق</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌐</div>
+                        <h3>واجهة ويب 3.0</h3>
+                        <p>تكامل مع المحافظ الرقمية وتقنيات الويب الموزعة</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم كيف تعمل -->
+        <section id="how-it-works" class="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">كيف تعمل المنصة</h2>
+                    <p class="section-description">3 خطوات بسيطة لتوثيق الشهادات</p>
+                </div>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">تسجيل المؤسسة</h3>
+                        <p class="step-description">قم بتسجيل مؤسستك وتقديم المستندات المطلوبة للحصول على الاعتماد</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">إصدار الشهادات</h3>
+                        <p class="step-description">أصدر الشهادات للمستفيدين وسيتم تخزينها تلقائياً على البلوكشين</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">التحقق الفوري</h3>
+                        <p class="step-description">يمكن لأي شخص التحقق من صحة الشهادة باستخدام الرقم الفريد</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم التحقق السريع -->
+        <section id="verify" class="quick-verify">
+            <div class="container">
+                <div class="verify-content">
+                    <h2 class="section-title">تحقق من صحة شهادة</h2>
+                    <p class="section-description">أدخل رقم الشهادة للتحقق من صحتها على البلوكشين</p>
+                    <form class="verify-form" id="quickVerifyForm">
+                        <div class="verify-input-group">
+                            <input type="text" id="certificateNumber" placeholder="أدخل رقم الشهادة (مثال: CERT-2024-001)" required>
+                            <button type="submit" class="btn-primary">تحقق الآن</button>
+                        </div>
+                    </form>
+                    <div class="verify-result" id="verifyResult"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم الدعوة للعمل -->
+        <section class="cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>جاهز لبدء توثيق شهاداتك؟</h2>
+                    <p>انضم إلى المئات من المؤسسات التي تستخدم تقنية البلوكشين لتوثيق شهاداتها</p>
+                    <div class="cta-buttons">
+                        <a href="#register" class="btn-primary btn-large">سجل مؤسستك</a>
+                        <a href="#login" class="btn-secondary btn-large">الدخول للحساب</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- التذييل -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <div class="footer-logo">
+                            <h3>شهادة</h3>
+                            <p>منصة توثيق الشهادات</p>
+                        </div>
+                        <p class="footer-description">
+                            منصة رائدة في توثيق الشهادات باستخدام تقنية البلوكشين لتوفير الأمان والشفافية
+                        </p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>روابط سريعة</h4>
+                        <a href="#features">المميزات</a>
+                        <a href="#how-it-works">كيف تعمل</a>
+                        <a href="#verify">تحقق من شهادة</a>
+                        <a href="#login">تسجيل الدخول</a>
+                    </div>
+                    <div class="footer-section">
+                        <h4>الدعم</h4>
+                        <a href="#">الأسئلة الشائعة</a>
+                        <a href="#">الاتصال بنا</a>
+                        <a href="#">الشروط والأحكام</a>
+                        <a href="#">سياسة الخصوصية</a>
+                    </div>
+                    <div class="footer-section">
+                        <h4>التواصل</h4>
+                        <p>البريد الإلكتروني: info@shahada.com</p>
+                        <p>الهاتف: +966 123 456 789</p>
+                        <div class="social-links">
+                            <a href="#">تويتر</a>
+                            <a href="#">لينكد إن</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 منصة شهادة. جميع الحقوق محفوظة.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- صفحة تسجيل الدخول -->
+    <div id="login-page" style="display: none;">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h2>تسجيل الدخول</h2>
+                    <p>أدخل بيانات حسابك للدخول إلى المنصة</p>
+                </div>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">البريد الإلكتروني</label>
+                        <input type="email" id="loginEmail" required placeholder="you@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">كلمة المرور</label>
+                        <input type="password" id="loginPassword" required placeholder="أدخل كلمة المرور">
+                    </div>
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox"> تذكرني
+                        </label>
+                        <a href="#" class="form-link">نسيت كلمة المرور؟</a>
+                    </div>
+                    <button type="submit" class="btn-primary btn-large" style="width: 100%;">تسجيل الدخول</button>
+                    <div class="form-divider">
+                        <span>أو</span>
+                    </div>
+                    <button type="button" class="wallet-btn" onclick="connectWallet()">
+                        <span>⛓️</span>
+                        الاتصال بمحفظة Web3
+                    </button>
+                </form>
+                <div class="auth-footer">
+                    <p>ليس لديك حساب؟ <a href="#register" class="form-link">إنشاء حساب جديد</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- صفحة التسجيل -->
+    <div id="register-page" style="display: none;">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h2>إنشاء حساب جديد</h2>
+                    <p>اختر نوع الحساب المناسب لمتطلباتك</p>
+                </div>
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="accountType">نوع الحساب</label>
+                        <select id="accountType" required>
+                            <option value="">اختر نوع الحساب</option>
+                            <option value="issuer">مصدر شهادات</option>
+                            <option value="verifier">مدقق شهادات</option>
+                            <option value="individual">فردي</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="orgName">اسم المؤسسة</label>
+                        <input type="text" id="orgName" required placeholder="اسم المؤسسة أو المنظمة">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">البريد الإلكتروني</label>
+                        <input type="email" id="registerEmail" required placeholder="you@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">كلمة المرور</label>
+                        <input type="password" id="registerPassword" required placeholder="كلمة مرور قوية">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">تأكيد كلمة المرور</label>
+                        <input type="password" id="confirmPassword" required placeholder="أعد إدخال كلمة المرور">
+                    </div>
+                    <label class="checkbox-label">
+                        <input type="checkbox" required> أوافق على الشروط والأحكام وسياسة الخصوصية
+                    </label>
+                    <button type="submit" class="btn-primary btn-large" style="width: 100%; margin-top: 1rem;">إنشاء الحساب</button>
+                    <div class="form-divider">
+                        <span>أو</span>
+                    </div>
+                    <button type="button" class="wallet-btn" onclick="connectWallet()">
+                        <span>⛓️</span>
+                        الاتصال بمحفظة Web3
+                    </button>
+                </form>
+                <div class="auth-footer">
+                    <p>لديك حساب بالفعل؟ <a href="#login" class="form-link">تسجيل الدخول</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- لوحة التحكم -->
+    <div id="dashboard-page" style="display: none;">
+        <div class="dashboard">
+            <div class="container">
+                <div class="dashboard-header">
+                    <h1>لوحة التحكم</h1>
+                    <p>مرحباً بك في منصة شهادة</p>
+                </div>
+                
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="number" id="user-certificates">0</div>
+                        <div class="label">شهاداتي</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number" id="pending-verifications">0</div>
+                        <div class="label">طلبات التحقق</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number" id="success-rate">0%</div>
+                        <div class="label">معدل النجاح</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number" id="blockchain-tx">0</div>
+                        <div class="label">معاملات بلوكشين</div>
+                    </div>
+                </div>
+
+                <div class="dashboard-actions">
+                    <div class="action-card" onclick="showSection('issue-certificate')">
+                        <div class="icon">📄</div>
+                        <h3>إصدار شهادة جديدة</h3>
+                        <p>أصدر شهادة جديدة وتخزينها على البلوكشين</p>
+                    </div>
+                    <div class="action-card" onclick="showSection('my-certificates')">
+                        <div class="icon">📋</div>
+                        <h3>شهاداتي</h3>
+                        <p>عرض وإدارة جميع الشهادات المصدرة</p>
+                    </div>
+                    <div class="action-card" onclick="showSection('verify-requests')">
+                        <div class="icon">🔍</div>
+                        <h3>طلبات التحقق</h3>
+                        <p>إدارة طلبات التحقق الواردة</p>
+                    </div>
+                    <div class="action-card" onclick="showSection('reports')">
+                        <div class="icon">📊</div>
+                        <h3>التقارير</h3>
+                        <p>عرض الإحصائيات والتقارير</p>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h3>النشاط الأخير</h3>
+                    <div class="activity-list" id="activityList">
+                        <!-- سيتم ملء النشاطات ديناميكياً -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // تطبيق منصة توثيق الشهادات
+        class CertificatePlatform {
+            constructor() {
+                this.currentPage = 'home';
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.setupNavigation();
+                this.loadDemoData();
+            }
+
+            setupEventListeners() {
+                // نموذج التحقق السريع
+                const verifyForm = document.getElementById('quickVerifyForm');
+                if (verifyForm) {
+                    verifyForm.addEventListener('submit', (e) => this.handleQuickVerify(e));
+                }
+
+                // نموذج تسجيل الدخول
+                const loginForm = document.getElementById('loginForm');
+                if (loginForm) {
+                    loginForm.addEventListener('submit', (e) => this.handleLogin(e));
+                }
+
+                // نموذج التسجيل
+                const registerForm = document.getElementById('registerForm');
+                if (registerForm) {
+                    registerForm.addEventListener('submit', (e) => this.handleRegister(e));
+                }
+
+                // قائمة الجوال
+                const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.addEventListener('click', () => this.toggleMobileMenu());
+                }
+
+                // التنقل السلس
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const target = anchor.getAttribute('href').substring(1);
+                        this.navigateTo(target);
+                    });
+                });
+
+                // التحكم في زر رجوع المتصفح
+                window.addEventListener('popstate', (e) => {
+                    this.handleBrowserBack(e);
+                });
+            }
+
+            setupNavigation() {
+                // إعداد التنقل الأولي
+                const hash = window.location.hash.substring(1);
+                if (hash) {
+                    this.navigateTo(hash);
+                }
+            }
+
+            navigateTo(page) {
+                // إخفاء جميع الصفحات
+                document.querySelectorAll('[id$="-page"]').forEach(el => {
+                    el.style.display = 'none';
+                });
+
+                // إظهار الصفحة المطلوبة
+                switch(page) {
+                    case 'home':
+                        document.getElementById('home-page').style.display = 'block';
+                        break;
+                    case 'login':
+                        document.getElementById('login-page').style.display = 'block';
+                        break;
+                    case 'register':
+                        document.getElementById('register-page').style.display = 'block';
+                        break;
+                    case 'dashboard':
+                        document.getElementById('dashboard-page').style.display = 'block';
+                        this.loadDashboardData();
+                        break;
+                    default:
+                        document.getElementById('home-page').style.display = 'block';
+                        // إذا كان hash يشير إلى قسم في الصفحة الرئيسية
+                        if (page && document.getElementById(page)) {
+                            document.getElementById(page).scrollIntoView({ behavior: 'smooth' });
+                        }
+                }
+
+                this.currentPage = page;
+                window.history.pushState({ page }, '', `#${page}`);
+            }
+
+            handleBrowserBack(e) {
+                const state = e.state;
+                if (state && state.page) {
+                    this.navigateTo(state.page);
+                } else {
+                    this.navigateTo('home');
+                }
+            }
+
+            async handleQuickVerify(e) {
+                e.preventDefault();
+                
+                const certificateNumber = document.getElementById('certificateNumber').value.trim();
+                const resultDiv = document.getElementById('verifyResult');
+
+                if (!certificateNumber) {
+                    this.showNotification('يرجى إدخال رقم الشهادة', 'error');
+                    return;
+                }
+
+                // عرض حالة التحميل
+                resultDiv.innerHTML = `
+                    <div class="loading-state">
+                        <div class="spinner"></div>
+                        <p>جاري التحقق من الشهادة على البلوكشين...</p>
+                    </div>
+                `;
+                resultDiv.classList.add('show', 'loading');
+
+                try {
+                    // محاكاة الاستجابة من الخادم
+                    const result = await this.mockVerifyCertificate(certificateNumber);
+                    
+                    if (result.success) {
+                        this.displayVerificationResult(result.data);
+                    } else {
+                        this.showVerificationError(result.message);
+                    }
+                } catch (error) {
+                    this.showVerificationError('فشل في التحقق. يرجى المحاولة مرة أخرى.');
+                }
+            }
+
+            async mockVerifyCertificate(certificateNumber) {
+                // محاكاة تأخير الشبكة
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // بيانات وهمية للعرض
+                const mockData = {
+                    'CERT-2024-001': {
+                        success: true,
+                        data: {
+                            certificate_number: 'CERT-2024-001',
+                            recipient_name: 'أحمد محمد',
+                            certificate_type: 'شهادة إتمام دورة',
+                            issue_date: '2024-03-15',
+                            issuer_name: 'أكاديمية التطوير',
+                            status: 'active',
+                            blockchain_verified: true,
+                            blockchain_timestamp: 1710451200,
+                            blockchain_hash: '0x1a2b3c4d5e6f7890abcdef1234567890'
+                        }
+                    },
+                    'CERT-2024-002': {
+                        success: false,
+                        message: 'الشهادة غير موجودة'
+                    }
+                };
+
+                return mockData[certificateNumber] || {
+                    success: false,
+                    message: 'رقم الشهادة غير صحيح'
+                };
+            }
+
+            displayVerificationResult(data) {
+                const resultDiv = document.getElementById('verifyResult');
+                const statusClass = data.blockchain_verified ? 'success' : 'warning';
+                
+                resultDiv.innerHTML = `
+                    <div class="verification-result ${statusClass}">
+                        <div class="result-header">
+                            <h3>${data.blockchain_verified ? '✓ الشهادة موثقة' : '⚠ تحذير في التحقق'}</h3>
+                            <span class="status-badge ${data.status}">${this.getStatusText(data.status)}</span>
+                        </div>
+                        <div class="result-details">
+                            <div class="detail-row">
+                                <span class="label">رقم الشهادة:</span>
+                                <span class="value">${data.certificate_number}</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="label">اسم المستلم:</span>
+                                <span class="value">${data.recipient_name}</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="label">الجهة المصدرة:</span>
+                                <span class="value">${data.issuer_name}</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="label">تاريخ الإصدار:</span>
+                                <span class="value">${new Date(data.issue_date).toLocaleDateString('ar-SA')}</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="label">التحقق على البلوكشين:</span>
+                                <span class="value ${data.blockchain_verified ? 'verified' : 'not-verified'}">
+                                    ${data.blockchain_verified ? '✓ تم التحقق' : '✗ لم يتم التحقق'}
+                                </span>
+                            </div>
+                            ${data.blockchain_hash ? `
+                            <div class="detail-row">
+                                <span class="label">البصمة الرقمية:</span>
+                                <span class="value hash">${data.blockchain_hash}</span>
+                            </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+                resultDiv.classList.add('show');
+                resultDiv.classList.remove('loading');
+            }
+
+            showVerificationError(message) {
+                const resultDiv = document.getElementById('verifyResult');
+                resultDiv.innerHTML = `
+                    <div class="verification-result error">
+                        <div class="result-header">
+                            <h3>❌ فشل في التحقق</h3>
+                        </div>
+                        <div class="result-details">
+                            <p>${message}</p>
+                        </div>
+                    </div>
+                `;
+                resultDiv.classList.add('show');
+                resultDiv.classList.remove('loading');
+            }
+
+            async handleLogin(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+
+                if (!email || !password) {
+                    this.showNotification('يرجى ملء جميع الحقول', 'error');
+                    return;
+                }
+
+                this.showNotification('جاري تسجيل الدخول...', 'info');
+
+                // محاكاة تسجيل الدخول
+                setTimeout(() => {
+                    localStorage.setItem('user_email', email);
+                    localStorage.setItem('user_logged_in', 'true');
+                    this.showNotification('تم تسجيل الدخول بنجاح!', 'success');
+                    this.navigateTo('dashboard');
+                }, 2000);
+            }
+
+            async handleRegister(e) {
+                e.preventDefault();
+                
+                const accountType = document.getElementById('accountType').value;
+                const orgName = document.getElementById('orgName').value;
+                const email = document.getElementById('registerEmail').value;
+                const password = document.getElementById('registerPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+
+                if (!accountType || !orgName || !email || !password || !confirmPassword) {
+                    this.showNotification('يرجى ملء جميع الحقول', 'error');
+                    return;
+                }
+
+                if (password !== confirmPassword) {
+                    this.showNotification('كلمات المرور غير متطابقة', 'error');
+                    return;
+                }
+
+                this.showNotification('جاري إنشاء الحساب...', 'info');
+
+                // محاكاة التسجيل
+                setTimeout(() => {
+                    localStorage.setItem('user_email', email);
+                    localStorage.setItem('user_org', orgName);
+                    localStorage.setItem('user_type', accountType);
+                    localStorage.setItem('user_logged_in', 'true');
+                    this.showNotification('تم إنشاء الحساب بنجاح!', 'success');
+                    this.navigateTo('dashboard');
+                }, 2000);
+            }
+
+            async connectWallet() {
+                this.showNotification('جاري الاتصال بالمحفظة...', 'info');
+                
+                if (typeof window.ethereum !== 'undefined') {
+                    try {
+                        const accounts = await window.ethereum.request({ 
+                            method: 'eth_requestAccounts' 
+                        });
+                        
+                        const account = accounts[0];
+                        localStorage.setItem('wallet_address', account);
+                        this.showNotification(`تم الاتصال: ${account.substring(0,6)}...${account.substring(38)}`, 'success');
+                        
+                    } catch (error) {
+                        this.showNotification('فشل في الاتصال بالمحفظة', 'error');
+                    }
+                } else {
+                    // محاكاة الاتصال للمعاينة
+                    const mockAccount = '0x' + Math.random().toString(16).substring(2,42);
+                    localStorage.setItem('wallet_address', mockAccount);
+                    this.showNotification(`تم الاتصال بالمحفظة التجريبية`, 'success');
+                }
+            }
+
+            loadDemoData() {
+                // تحميل الإحصائيات الوهمية
+                setTimeout(() => {
+                    const elements = {
+                        'total-certificates': '10,247',
+                        'verified-count': '99.9%',
+                        'issuer-count': '523'
+                    };
+
+                    for (const [id, value] of Object.entries(elements)) {
+                        const element = document.getElementById(id);
+                        if (element) {
+                            this.animateValue(element, 0, parseInt(value.replace(',', '')), 2000);
+                        }
+                    }
+                }, 1000);
+            }
+
+            loadDashboardData() {
+                // تحميل بيانات لوحة التحكم
+                const stats = {
+                    'user-certificates': 15,
+                    'pending-verifications': 3,
+                    'success-rate': 98,
+                    'blockchain-tx': 27
+                };
+
+                for (const [id, value] of Object.entries(stats)) {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        this.animateValue(element, 0, value, 1500);
+                    }
+                }
+
+                // تحميل النشاطات الأخيرة
+                const activities = [
+                    { icon: '📄', text: 'تم إصدار شهادة جديدة CERT-2024-015', time: 'منذ 5 دقائق' },
+                    { icon: '🔍', text: 'تم التحقق من شهادة CERT-2024-010', time: 'منذ ساعة' },
+                    { icon: '✅', text: 'تمت الموافقة على طلب تحقق جديد', time: 'منذ 3 ساعات' },
+                    { icon: '⛓️', text: 'تم تخزين شهادة على البلوكشين', time: 'منذ 6 ساعات' }
+                ];
+
+                const activityList = document.getElementById('activityList');
+                if (activityList) {
+                    activityList.innerHTML = activities.map(activity => `
+                        <div class="activity-item">
+                            <div class="activity-icon">${activity.icon}</div>
+                            <div>
+                                <div>${activity.text}</div>
+                                <small style="color: var(--text-secondary);">${activity.time}</small>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            }
+
+            animateValue(element, start, end, duration) {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    const value = Math.floor(progress * (end - start) + start);
+                    element.textContent = value.toLocaleString() + (element.id === 'verified-count' || element.id === 'success-rate' ? '%' : '');
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+
+            showSection(section) {
+                this.showNotification(`فتح قسم: ${section}`, 'info');
+                // هنا يمكن إضافة منطق إظهار الأقسام المختلفة
+            }
+
+            toggleMobileMenu() {
+                const navLinks = document.querySelector('.nav-links');
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            }
+
+            getStatusText(status) {
+                const statusMap = {
+                    'active': 'نشطة',
+                    'revoked': 'ملغاة',
+                    'expired': 'منتهية'
+                };
+                return statusMap[status] || status;
+            }
+
+            showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.innerHTML = `
+                    <span class="notification-message">${message}</span>
+                    <button class="notification-close" onclick="this.parentElement.remove()">×</button>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    if (notification.parentElement) {
+                        notification.style.animation = 'slideOut 0.3s ease';
+                        setTimeout(() => notification.remove(), 300);
+                    }
+                }, 5000);
+            }
+        }
+
+        // تهيئة التطبيق عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', () => {
+            window.platform = new CertificatePlatform();
+        });
+    </script>
+    <script>
+        class APIService {
+    constructor() {
+        // عنوان الـ Backend - غير هذا حسب إعداداتك
+        this.BASE_URL = 'http://localhost/certificate-platform/backend/api';
+        this.token = localStorage.getItem('auth_token');
+    }
+
+    async request(endpoint, options = {}) {
+        const headers = {
+            'Content-Type': 'application/json',
+            ...options.headers
+        };
+
+        if (this.token) {
+            headers['Authorization'] = `Bearer ${this.token}`;
+        }
+
+        try {
+            const response = await fetch(`${this.BASE_URL}${endpoint}`, {
+                ...options,
+                headers
+            });
+
+            const data = await response.json();
+            
+            if (!response.ok) {
+                throw new Error(data.message || 'حدث خطأ في الخادم');
+            }
+            
+            return data;
+        } catch (error) {
+            console.error('API Request Error:', error);
+            throw error;
+        }
+    }
+
+    // تسجيل الدخول
+    async login(email, password) {
+        return this.request('/auth/login.php', {
+            method: 'POST',
+            body: JSON.stringify({ email, password })
+        });
+    }
+
+    // تسجيل مستخدم جديد
+    async register(userData) {
+        return this.request('/auth/register.php', {
+            method: 'POST',
+            body: JSON.stringify(userData)
+        });
+    }
+
+    // التحقق من شهادة
+    async verifyCertificate(certificateNumber) {
+        return this.request(`/certificates/verify.php?certificate_number=${encodeURIComponent(certificateNumber)}`);
+    }
+
+    // إنشاء شهادة جديدة
+    async createCertificate(certificateData) {
+        return this.request('/certificates/create.php', {
+            method: 'POST',
+            body: JSON.stringify(certificateData)
+        });
+    }
+
+    // تحديث الـ token
+    setToken(token) {
+        this.token = token;
+        localStorage.setItem('auth_token', token);
+    }
+
+    // تسجيل الخروج
+    logout() {
+        this.token = null;
+        localStorage.removeItem('auth_token');
+        localStorage.removeItem('user_data');
+    }
+}
+    </script>
+</body>
+</html>
